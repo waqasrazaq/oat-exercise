@@ -1,78 +1,107 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# OAT Exercise (REST API )
+The goal of the exercise is to create a REST API that will handle two different resources :
+* multiple-choice questions 
+* choices related to a question
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Only specific endpoints are required as part of this exercise and are described in shared the open-api.yaml.
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Technologies Used
+* PHP 7.2
+* Laravel Framework 6.11.0
+* Composer as package manager
+* Google-translate-php
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Make sure that required version of **PHP**, **Git** and **Composer package manager** is already installed on the system. If not then follow the instructions to download and install all of these dependencies from the below links
 
-## Learning Laravel
+* [Git](https://git-scm.com/downloads)
+* [Composer package manager](https://getcomposer.org/)
+* [Web server for Mac](https://www.mamp.info/en/downloads/)
+* [Web server for Windows](http://www.wampserver.com/en/)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
+The installation process is quite simple and straightforward. Just follow the below steps
+ 
+- Open the terminal and navigate into the root directory of the web server and then execute the below command to download the code from github
+```
+git clone https://github.com/waqasrazaq/oat-exercise.git
+```
+- Once the code is downloaded then navigate into project directory (oat-exercise) and execute the below command in the root directory and wait for the process to download and install all the required components and dependencies
 
-## Laravel Sponsors
+```composer install```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+It will take some time, so wait for a couple of minutes to complete the process.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+Once the process is completed then Run the local dev server as below
+```
+php artisan serve
+```
 
-## Contributing
+That's it. Our oat-exercise is installed and configured. Double check that dev web server is started and not down the base path
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## End Points
+**1- Get Questions**: 
 
-## Code of Conduct
+Method: Get
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Example URL http://127.0.0.1:8000/api/questions?lang=en
 
-## Security Vulnerabilities
+For valid response, HTTP status code 200 with list of all the questions items into the files (json format) and status code 500 in case any error on the server.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+**2- Save Question** 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Method: Post 
+
+Example URL http://127.0.0.1:8000/api/questions
+
+Payload: JSON Object of Question schema as below. 
+```
+{
+    "text": "What is the capital of Luxembourg ?",
+    "createdAt": "2019-06-01 00:00:00",
+    "choices": [
+      {
+        "text": "Luxembourg"
+      },
+      {
+        "text": "Paris"
+      },
+      {
+        "text": "Berlin"
+      }
+    ]
+  }
+```
+
+For valid response, HTTP status code 200 with the newly created JSON object and status code 500 in case any error on the server.
+
+
+## A brief introduction to project structure
+Although the information below on the application structure is very brief, at least it gives a starting point for the developers to work on the project
+
+
+* **routes/api.php** Contains the routes for both end points
+* **app/Http/Controllers/QuestionController.php** Handles end points request
+* **app/Http/Requests/GetQuestionsRequest, SaveQuestionPostRequest** Controls validates the api request
+* **app/Domains/Question** directory holds the complete business logic of these end points
+* **config/common.php** Holds configuration variables, for example variables to select data sources (JSON or CSV etc)
+* **storage/app** Contains the data file for questions
+* **test/Feature/QuestionAPITest.php** Contains end point test cases
+* **vendor** - Contains all the composer dependencies
+
+For more details on the files structure, follow this docs https://laravel.com/docs/ link.
+
+### Execute Tests
+Execute below command to run the tests
+```
+./vendor/bin/phpunit
+```
+
+## References
+Below link contains the best practices (Design principles and Design patterns specific to Laravel) and Coding standards which i have followed in this project
+
+http://www.laravelbestpractices.com/
